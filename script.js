@@ -8,12 +8,19 @@ let displayCategories = (categories) => {
   //   categoriescContanar.innerHTML = "";
   for (let categorie of categories) {
     let btnDiv = document.createElement("div");
-    btnDiv.innerHTML = `<button onclick="lodeByCategories(${categorie.id})" class=" btn btn-soft btn-primary w-full mt-4 text-black border-none ">${categorie.category_name}</button>
+    btnDiv.innerHTML = `<button id="btn-Categories${categorie.id}" onclick="lodeByCategories(${categorie.id});addOrRemoveHighLight(${categorie.id}) " class=" btn btn-soft btn-success  w-full mt-4 text-black border-none btn-clicked ">${categorie.category_name}</button>
     `;
     categoriescContanar.appendChild(btnDiv);
   }
 };
 lodeCategories();
+
+let addOrRemoveHighLight = (id) => {
+  let button = document.querySelectorAll(".btn-clicked");
+  button.forEach((btn) => btn.classList.remove("highlight"));
+  let btn = document.getElementById(`btn-Categories${id}`);
+  btn.classList.add("highlight");
+};
 
 let lodeByCategories = (id) => {
   let url = `https://openapi.programming-hero.com/api/category/${id}`;
@@ -32,7 +39,7 @@ let displayPlantByCategoies = (plantsByCategories) => {
       <p class="">
         ${plantsByCategorie.description} </p>
       <div class="flex justify-between items-center">
-        <h1 class=" bg-[#DCFCE7] text-[#15803D] rounded-2xl w-25 te ">${plantsByCategorie.category}</h1>
+        <h1 class=" bg-[#DCFCE7] text-[#15803D] rounded-2xl w-25 text-center ">${plantsByCategorie.category}</h1>
         <h1>৳${plantsByCategorie.price}</h1>
       </div>
     </div>
@@ -57,7 +64,7 @@ let displayAllPlant = (allPlants) => {
       <p class="">
         ${allPlant.description} </p>
       <div class="flex justify-between items-center">
-        <h1 class=" bg-[#DCFCE7] text-[#15803D] rounded-2xl w-25 te ">${allPlant.category}</h1>
+        <h1 class=" bg-[#DCFCE7] text-[#15803D] rounded-2xl w-25 text-center ">${allPlant.category}</h1>
         <h1>৳${allPlant.price}</h1>
       </div>
     </div>
