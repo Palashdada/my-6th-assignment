@@ -5,6 +5,7 @@ let lodeCategories = () => {
 };
 let displayCategories = (categories) => {
   let categoriescContanar = document.getElementById("categories-contanar");
+  categoriescContanar.innerHTML = "";
   //   categoriescContanar.innerHTML = "";
   for (let categorie of categories) {
     let btnDiv = document.createElement("div");
@@ -33,7 +34,7 @@ let displayPlantByCategoies = (plantsByCategories) => {
   cartContaner.innerHTML = "";
   for (let plantsByCategorie of plantsByCategories) {
     let cardDiv = document.createElement("div");
-    cardDiv.innerHTML = `<div class="bg-white shadow-md rounded-lg p-4 mb-6 ">
+    cardDiv.innerHTML = `<div onclick="lodeDetaile(${plantsByCategorie.id})" class="bg-white shadow-md rounded-lg p-4 mb-6  ">
       <img class="w-full h-48 object-cover rounded-xl" src="${plantsByCategorie.image}" alt="" />
       <h1 class="text-xl font-bold">${plantsByCategorie.name}</h1>
       <p class="">
@@ -58,7 +59,7 @@ let displayAllPlant = (allPlants) => {
   cartContaner.innerHTML = "";
   for (let allPlant of allPlants) {
     let cardDiv = document.createElement("div");
-    cardDiv.innerHTML = `<div class="bg-white shadow-md rounded-lg p-4 mb-6 ">
+    cardDiv.innerHTML = `<div onclick="lodeDetaile(${allPlant.id})"  class="bg-white shadow-md rounded-lg p-4 mb-6  ">
       <img class="w-full h-48 object-cover rounded-xl" src="${allPlant.image}" alt="" />
       <h1 class="text-xl font-bold">${allPlant.name}</h1>
       <p class="">
@@ -71,5 +72,21 @@ let displayAllPlant = (allPlants) => {
     `;
     cartContaner.appendChild(cardDiv);
   }
+};
+lodeDetaile = (id) => {
+  fetch(`https://openapi.programming-hero.com/api/plant/${id}`)
+    .then((res) => res.json())
+    .then((deatile) => displayDetaile(deatile.plants));
+};
+displayDetaile = (details) => {
+  let modalBox = document.getElementById("modal-box");
+  modalBox.innerHTML = ` <div class="bg-white p-6 rounded-2xl shadow-xl">
+        <h1 class="text-2xl font-bold text-gray-800 mb-2">${details.name}</h1>
+        <img class="w-full h-60 object-cover rounded-xl mb-4 "  src="${details.image}" alt=""  >
+        <p><span class="font-bold">Category :</span> <span> ${details.category} </span></p>
+        <p ><span class="font-bold">Price :</span> <span>${details.price}</span></p>
+        <p> <span class="font-bold">Description :</span> <span>${details.description}</span></p>
+    </div>`;
+  document.getElementById("my_modal_5").showModal();
 };
 lodeAllPlants();
