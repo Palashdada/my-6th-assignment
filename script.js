@@ -24,6 +24,7 @@ let addOrRemoveHighLight = (id) => {
 };
 
 let lodeByCategories = (id) => {
+  lodingDiv(true);
   let url = `https://openapi.programming-hero.com/api/category/${id}`;
   fetch(url)
     .then((res) => res.json())
@@ -52,9 +53,11 @@ let displayPlantByCategoies = (plantsByCategories) => {
     `;
     cartContaner.appendChild(cardDiv);
   }
+  lodingDiv(false);
 };
 
 let lodeAllPlants = () => {
+  //   lodingDiv(true);
   fetch("https://openapi.programming-hero.com/api/plants")
     .then((res) => res.json())
     .then((dataAllPlant) => displayAllPlant(dataAllPlant.plants));
@@ -82,6 +85,7 @@ let displayAllPlant = (allPlants) => {
     `;
     cartContaner.appendChild(cardDiv);
   }
+  //   lodingDiv(false);
 };
 lodeDetaile = (id) => {
   fetch(`https://openapi.programming-hero.com/api/plant/${id}`)
@@ -100,3 +104,11 @@ displayDetaile = (details) => {
   document.getElementById("my_modal_5").showModal();
 };
 lodeAllPlants();
+
+let lodingDiv = (sta) => {
+  if (sta == true) {
+    document.getElementById("loding-div").classList.remove("hidden");
+  } else {
+    document.getElementById("loding-div").classList.add("hidden");
+  }
+};

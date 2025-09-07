@@ -98,15 +98,24 @@
     </section>
     <!-- Choose Your Trees -->
     <section class="mx-auto w-11/12">
-      <h1 class="text-center">Choose Your Trees</h1>
+      <h1 class="text-center font-bold text-2xl m-7">Choose Your Trees</h1>
+      <div class="flex justify-center items-center">
+        <span
+          id="loding-div"
+          class="loading loading-dots loading-xl justify-center items-center hidden"
+        ></span>
+      </div>
       <div class="grid grid-cols-12 gap-5">
-        <div id="categories-contanar" class="col-span-2">
-          <h1 class="font-bold mb-5 text-center">Categories</h1>
+        <div class="col-span-2">
+          <h1 class="font-bold mb-5 text-center text-xl">Categories</h1>
+          <div id="categories-contanar"></div>
         </div>
         <div id="" class="col-span-8">
           <div id="card-contaner" class="grid grid-cols-3 gap-3"></div>
         </div>
-        <div id="cart-contaner" class="col-span-2"></div>
+        <div id="cart-contaner" class="col-span-2">
+          <h1 class="font-bold mb-5 text-center text-xl">Your Cart</h1>
+        </div>
       </div>
     </section>
     <!-- Open the modal using ID.showModal() method -->
