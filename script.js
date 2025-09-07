@@ -35,7 +35,7 @@ let displayPlantByCategoies = (plantsByCategories) => {
   cartContaner.innerHTML = "";
   for (let plantsByCategorie of plantsByCategories) {
     let cardDiv = document.createElement("div");
-    cardDiv.innerHTML = `<div onclick="lodeDetaile(${plantsByCategorie.id})"  class="bg-white shadow-md rounded-lg p-4 mb-6 space-y-4  ">
+    cardDiv.innerHTML = `<div class="bg-white shadow-md rounded-lg p-4 mb-6 space-y-4" ><div onclick="lodeDetaile(${plantsByCategorie.id})"   >
       <img class="w-full h-48 object-cover rounded-xl" src="${plantsByCategorie.image}" alt="" />
       <h1 class="text-xl font-bold">${plantsByCategorie.name}</h1>
       <p class="">
@@ -45,11 +45,13 @@ let displayPlantByCategoies = (plantsByCategories) => {
         <h1>৳${plantsByCategorie.price}</h1>
         
       </div>
-      <button onclick="addToCart(${plantsByCategorie.id}, '${plantsByCategorie.name}', ${plantsByCategorie.price})" 
+      
+          
+    </div>
+    <div><button onclick="addToCart(${plantsByCategorie.id}, '${plantsByCategorie.name}', ${plantsByCategorie.price})" 
             class=" bg-green-600 text-white py-2  hover:bg-green-700 w-full rounded-xl ">
             Add to Cart
-          </button>
-    </div>
+          </button></div></div> 
     `;
     cartContaner.appendChild(cardDiv);
   }
@@ -67,21 +69,24 @@ let displayAllPlant = (allPlants) => {
   cartContaner.innerHTML = "";
   for (let allPlant of allPlants) {
     let cardDiv = document.createElement("div");
-    cardDiv.innerHTML = `<div onclick="lodeDetaile(${allPlant.id})"  class="bg-white shadow-md rounded-lg p-4 mb-6 space-y-4  ">
+    cardDiv.innerHTML = `
+    <div class="bg-white shadow-md rounded-lg p-4 mb-6 space-y-4  "><div onclick="lodeDetaile(${allPlant.id})"  >
       <img class="w-full h-48 object-cover rounded-xl" src="${allPlant.image}" alt="" />
-      <h1 class="text-xl font-bold">${allPlant.name}</h1>
+      <h1 class="text-xl font-bold text-center">${allPlant.name}</h1>
       <p class="">
         ${allPlant.description} </p>
-      <div class="flex justify-between items-center">
+      <div class="md:flex justify-between items-center text-center">
         <h1 class=" bg-[#DCFCE7] text-[#15803D] rounded-2xl w-25 text-center ">${allPlant.category}</h1>
         <h1>৳${allPlant.price}</h1>
         
       </div>
-      <button onclick="addToCart(${allPlant.id}, '${allPlant.name}', ${allPlant.price})" 
+      
+          
+    </div>
+    <div><button onclick="addToCart(${allPlant.id}, '${allPlant.name}', ${allPlant.price})" 
             class=" bg-green-600 text-white py-2  hover:bg-green-700 w-full rounded-xl ">
             Add to Cart
-          </button>
-    </div>
+          </button></div></div>
     `;
     cartContaner.appendChild(cardDiv);
   }
