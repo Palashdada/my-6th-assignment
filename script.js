@@ -38,7 +38,7 @@ let displayPlantByCategoies = (plantsByCategories) => {
     cardDiv.innerHTML = `<div class="bg-white shadow-md rounded-lg p-4 mb-6 space-y-4" ><div onclick="lodeDetaile(${plantsByCategorie.id})"   >
       <img class="w-full h-48 object-cover rounded-xl" src="${plantsByCategorie.image}" alt="" />
       <h1 class="text-xl font-bold">${plantsByCategorie.name}</h1>
-      <p class="">
+      <p class="h-24">
         ${plantsByCategorie.description} </p>
       <div class="flex justify-between items-center">
         <h1 class=" bg-[#DCFCE7] text-[#15803D] rounded-2xl w-25 text-center ">${plantsByCategorie.category}</h1>
@@ -57,6 +57,51 @@ let displayPlantByCategoies = (plantsByCategories) => {
   }
   lodingDiv(false);
 };
+let cart = [];
+let addToCart = (id, name, price) => {
+  let existing = cart.find((data) => data.id === id);
+  if (existing) {
+    existing.count = existing.count + 1;
+  } else {
+    cart.push({ id, name, price, count: 1 });
+  }
+  displayCart();
+};
+let removeCart = (id) => {
+  let index = cart.findIndex((item) => item.id === id);
+  if (index !== -1) {
+    if (cart[index].count > 1) {
+      cart[index].count = cart[index].count - 1;
+    } else {
+      cart.splice(index, 1);
+    }
+  }
+  displayCart();
+};
+displayCart = () => {
+  let cartContaner = document.getElementById("cart-contaner");
+  cartContaner.innerHTML = "";
+  cart.forEach((item) => {
+    let div = document.createElement("div");
+    div.innerHTML = `  <div
+              class="flex justify-between items-center bg-[#F0FDF4] rounded-xl px-5 m-4"
+            >
+              <div>
+                <p class="font-bold">${item.name}</p>
+                <h1>Price: ৳${item.price}*${item.count}</h1>
+              </div>
+              <div onclick="removeCart(${item.id})"><i class="fa-solid fa-xmark"></i></div>
+            </div>`;
+    cartContaner.appendChild(div);
+  });
+  let total = 0;
+  for (let item of cart) {
+    total = item.price * item.count + total;
+  }
+  let totalDiv = document.createElement("div");
+  totalDiv.innerHTML = ` <h1 class="font-bold text-2xl">Total: ৳ ${total}</h1>`;
+  cartContaner.appendChild(totalDiv);
+};
 
 let lodeAllPlants = () => {
   //   lodingDiv(true);
@@ -73,7 +118,7 @@ let displayAllPlant = (allPlants) => {
     <div class="bg-white shadow-md rounded-lg p-4 mb-6 space-y-4  "><div onclick="lodeDetaile(${allPlant.id})"  >
       <img class="w-full h-48 object-cover rounded-xl" src="${allPlant.image}" alt="" />
       <h1 class="text-xl font-bold text-center">${allPlant.name}</h1>
-      <p class="">
+      <p class="h-24">
         ${allPlant.description} </p>
       <div class="md:flex justify-between items-center text-center">
         <h1 class=" bg-[#DCFCE7] text-[#15803D] rounded-2xl w-25 text-center ">${allPlant.category}</h1>
